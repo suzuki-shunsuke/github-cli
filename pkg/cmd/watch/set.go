@@ -1,4 +1,4 @@
-package watching
+package watch
 
 import (
 	"github.com/urfave/cli"

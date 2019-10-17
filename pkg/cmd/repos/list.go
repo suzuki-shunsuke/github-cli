@@ -20,7 +20,7 @@ func listRepos(
 		if err != nil {
 			return err
 		}
-		defer resp.Body.Close()
+		resp.Body.Close()
 		if resp.StatusCode >= 400 {
 			return errors.New("GitHub API's status code >= 400: " + strconv.Itoa(resp.StatusCode))
 		}

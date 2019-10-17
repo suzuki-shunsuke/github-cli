@@ -8,7 +8,7 @@ import (
 	"github.com/urfave/cli"
 
 	"github.com/suzuki-shunsuke/github-cli/pkg/cmd/repos"
-	"github.com/suzuki-shunsuke/github-cli/pkg/cmd/watching"
+	"github.com/suzuki-shunsuke/github-cli/pkg/cmd/watch"
 	"github.com/suzuki-shunsuke/github-cli/pkg/domain"
 )
 
@@ -41,13 +41,26 @@ func main() {
 
 	app.Commands = []cli.Command{
 		{
-			Name:  "watching",
+			Name:  "watch",
 			Usage: "GitHub watching API",
 			Subcommands: []cli.Command{
 				{
 					Name:   "set",
-					Usage:  "set GitHub watching",
-					Action: cliutil.WrapAction(watching.Set),
+					Usage:  "Set a Repository Subscription",
+					Action: cliutil.WrapAction(watch.Set),
+					Flags: []cli.Flag{
+						cli.BoolFlag{
+							Name: "subscribed,s",
+						},
+						cli.BoolFlag{
+							Name: "ignored,i",
+						},
+					},
+				},
+				{
+					Name:   "delete",
+					Usage:  "Delete a Repository Subscription",
+					Action: cliutil.WrapAction(watch.Delete),
 				},
 			},
 		},
