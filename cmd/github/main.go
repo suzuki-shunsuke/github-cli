@@ -12,6 +12,18 @@ import (
 	"github.com/suzuki-shunsuke/github-cli/pkg/domain"
 )
 
+var (
+	typeFlag = cli.StringFlag{
+		Name: "type,t",
+	}
+	sortFlag = cli.StringFlag{
+		Name: "sort",
+	}
+	directionFlag = cli.StringFlag{
+		Name: "direction,d",
+	}
+)
+
 func main() {
 	app := cli.NewApp()
 	app.Name = "github"
@@ -45,11 +57,41 @@ func main() {
 			Subcommands: []cli.Command{
 				{
 					Name:   "list",
-					Usage:  "list GitHub repositories",
-					Action: cliutil.WrapAction(repos.List),
+					Usage:  "List your repositories",
+					Action: cliutil.WrapAction(repos.ListYourRepos),
 					Flags: []cli.Flag{
 						cli.StringFlag{
-							Name: "type",
+							Name: "visibility,v",
+						},
+						cli.StringFlag{
+							Name: "affiliation,a",
+						},
+						typeFlag, sortFlag, directionFlag,
+					},
+				},
+				{
+					Name:   "list-user",
+					Usage:  "List user repositories",
+					Action: cliutil.WrapAction(repos.ListUserRepos),
+					Flags: []cli.Flag{
+						typeFlag, sortFlag, directionFlag,
+					},
+				},
+				{
+					Name:   "list-org",
+					Usage:  "List organization repositories",
+					Action: cliutil.WrapAction(repos.ListOrgRepos),
+					Flags: []cli.Flag{
+						typeFlag, sortFlag, directionFlag,
+					},
+				},
+				{
+					Name:   "list-all",
+					Usage:  "List all public repositories",
+					Action: cliutil.WrapAction(repos.ListAllRepos),
+					Flags: []cli.Flag{
+						cli.Int64Flag{
+							Name: "since",
 						},
 					},
 				},
