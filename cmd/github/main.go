@@ -45,17 +45,14 @@ func main() {
 			Usage: "GitHub watching API",
 			Subcommands: []cli.Command{
 				{
-					Name:   "set",
-					Usage:  "Set a Repository Subscription",
-					Action: cliutil.WrapAction(watch.Set),
-					Flags: []cli.Flag{
-						cli.BoolFlag{
-							Name: "subscribed,s",
-						},
-						cli.BoolFlag{
-							Name: "ignored,i",
-						},
-					},
+					Name:   "subscribe",
+					Usage:  "Subscribe a Repository",
+					Action: cliutil.WrapAction(watch.Subscribe),
+				},
+				{
+					Name:   "ignore",
+					Usage:  "Ignore a Repository",
+					Action: cliutil.WrapAction(watch.Ignore),
 				},
 				{
 					Name:   "delete",
