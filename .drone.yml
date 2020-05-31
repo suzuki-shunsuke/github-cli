@@ -43,7 +43,7 @@ steps:
   # Sometimes it is failed to release by goreleaser due to changes of go.sum
   - git checkout -- .
 - name: release
-  image: goreleaser/goreleaser:v0.136.0
+  image: goreleaser/goreleaser:v0.137.0
   commands:
   - goreleaser release
   environment:
@@ -55,7 +55,7 @@ steps:
     - tag
 
 - name: release/pr
-  image: goreleaser/goreleaser:v0.136.0
+  image: goreleaser/goreleaser:v0.137.0
   commands:
   - goreleaser release --snapshot
   volumes: *volumes
